@@ -1,0 +1,6 @@
+server:
+  port: 80
+spring:
+  mandatory-file-encoding: utf-8
+  application:
+    name: spring-boot-thymeleaf
