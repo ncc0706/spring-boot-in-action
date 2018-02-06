@@ -15,7 +15,7 @@ public class SpringBootThymeleafApplication {
 
 	@GetMapping(value = "/")
 	public String index(){
-		return "/index";
+		return "index";
 	}
 
 }
