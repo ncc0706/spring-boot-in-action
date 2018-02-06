@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(value = "/demo01")
-public class Demo01Controller {
+@RequestMapping(value = "/demo")
+public class DemoController {
 
-    @GetMapping(value = "/")
-    public String index(){
+    @GetMapping(value = "/01")
+    public String index_01(){
         return "/demo/01";
     }
 
