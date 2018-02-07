@@ -1,0 +1,15 @@
+server:
+  port: 4200
+spring:
+  application:
+    name: spring-boot-postgres
+  mandatory-file-encoding: UTF-8
+  datasource:
+    username: postgres
+    password: pg
+    url: jdbc:postgresql://192.168.163.110:5432/spring-boot
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
