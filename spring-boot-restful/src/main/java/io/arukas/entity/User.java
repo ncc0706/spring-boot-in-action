@@ -39,11 +39,11 @@ public class User {
     private Date birthday;
 
     @CreatedDate
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createTime;
 
     @LastModifiedDate
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date updateTime;
 
     @Version

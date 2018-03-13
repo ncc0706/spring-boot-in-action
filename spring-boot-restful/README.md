@@ -67,3 +67,13 @@ http://127.0.0.1:4200/swagger-ui.html
     
     jstatd -J-Djava.rmi.server.hostname=$HOST_IP -J-Djava.security.policy=$JAVA_HOME/jstatd.all.policy -p 1099 &
 
+## jpa
+```
+
+ @EnableJpaAuditing
+ @EntityListeners(AuditingEntityListener.class)
+ 
+ @CreatedDate
+ @LastModifiedDate
+
+```
