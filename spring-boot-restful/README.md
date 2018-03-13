@@ -42,4 +42,28 @@ http://127.0.0.1:4200/swagger-ui.html
     @FixMethodOrder(MethodSorters.JVM)
     
     https://github.com/junit-team/junit4/wiki/test-execution-order
+    
+    ## VM arguments
+    
+    ```
+    -Djava.rmi.server.hostname=$HOST_IP \
+    -Dcom.sun.management.jmxremote \
+    -Dcom.sun.management.jmxremote.port=$JMX_PORT \
+    -Dcom.sun.management.jmxremote.rmi.port=$JMX_PORT \
+    -Dcom.sun.management.jmxremote.local.only=false \
+    -Dcom.sun.management.jmxremote.authenticate=false \
+    -Dcom.sun.management.jmxremote.ssl=false \
+    
+    ```
+    
+    ## docker 部署
+    
+    docker run --rm -p 8000:8000 -p 10086:10086 -p 1099:1099 ncc0706/spring-boot-undertow:0.0.1-SNAPSHOT
+    
+    ## container 内部执行
+    
+    一定要注意 执行命令时，这个文件【jstatd.all.policy】的位置
+    ``jstatd -J-Djava.rmi.server.hostname=$HOST_IP -J-Djava.security.policy=jstatd.all.policy -p 1099``
+    
+    jstatd -J-Djava.rmi.server.hostname=$HOST_IP -J-Djava.security.policy=$JAVA_HOME/jstatd.all.policy -p 1099 &
 
