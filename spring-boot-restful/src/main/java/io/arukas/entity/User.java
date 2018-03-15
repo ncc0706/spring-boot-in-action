@@ -2,7 +2,7 @@ package io.arukas.entity;
 
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import org.hibernate.annotations.UpdateTimestamp;;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -42,7 +42,7 @@ public class User {
     @Temporal(TemporalType.TIMESTAMP)
     private Date createTime;
 
-    @LastModifiedDate
+    @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateTime;
 
