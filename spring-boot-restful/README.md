@@ -32,7 +32,18 @@ http://127.0.0.1:4200/swagger-ui.html
 
 有个废弃的警告 Spring->validtion->bean validator - ...
 
-生成静态文档
+
+
+#### 生成静态文档
+
+https://www.jianshu.com/p/eb68fecc62cd
+
+http://blog.csdn.net/qq_25215821/article/details/79175535
+
+https://github.com/Swagger2Markup/spring-swagger2markup-demo/blob/master/pom.xml
+
+https://github.com/Swagger2Markup/spring-swagger2markup-demo
+
 
 > http://mp.weixin.qq.com/s?__biz=MzAxODcyNjEzNQ==&mid=2247484764&idx=1&sn=10e4fcae5333687368960a2e64b2b70c&chksm=9bd0a8c4aca721d264e40f5f543b9f557eedf033719a97a38257835c5162ffa010c025580a65&mpshare=1&scene=23&srcid=0124apkywKZm35EYdYNPHyni#rd
 
