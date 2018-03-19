@@ -1,0 +1,15 @@
+server:
+  port: 80
+spring:
+  application:
+    name: spring-boot-querydsl
+  datasource:
+    url: jdbc:mysql://192.168.163.110:3306/spring_boot_querydsl?createDatabaseIfNotExist=true
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: root
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
