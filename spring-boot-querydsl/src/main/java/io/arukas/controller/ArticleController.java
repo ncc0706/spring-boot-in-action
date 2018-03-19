@@ -23,8 +23,8 @@ public class ArticleController {
     }
 
     @GetMapping(value = "/articles/save")
-    public Article save(){
-        return articleService.save();
+    public Article save(@RequestParam(required = false, name = "tagName") String tagName){
+        return articleService.save(tagName);
     }
 
     @GetMapping(value = "/articles/{id}")

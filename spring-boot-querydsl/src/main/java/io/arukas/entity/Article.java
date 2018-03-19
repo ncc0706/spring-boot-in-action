@@ -8,6 +8,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Data
 @Entity
@@ -32,5 +33,9 @@ public class Article {
 
     @Version
     private Integer version;
+
+    @ManyToMany
+//    @JoinColumn(foreignKey = "article_tag")
+    private Set<Tag> tags;
 
 }
