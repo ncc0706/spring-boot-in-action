@@ -8,6 +8,7 @@ import io.arukas.repo.ArticleRepository;
 import io.qala.datagen.RandomValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class ArticleService {
     @Autowired
     private JPAQueryFactory jpaQueryFactory;
 
+    @Transactional
     public List<Article> list(String title){
         QArticle qArticle = QArticle.article;
         JPAQuery<Article> jpaQuery = jpaQueryFactory.selectFrom(qArticle);
@@ -32,9 +34,18 @@ public class ArticleService {
         return fetch;
     }
 
+    @Transactional
     public Article save(){
 
         Article article = new Article();
+        article.setTitle(RandomValue.length(10).english());
+        article.setContent(RandomValue.length(12).english());
+        article = articleRepository.save(article);
+        return article;
+    }
+
+    public Article update(String id){
+        Article article = articleRepository.findOne(id);
         article.setTitle(RandomValue.length(10).english());
         article.setContent(RandomValue.length(12).english());
         article = articleRepository.save(article);

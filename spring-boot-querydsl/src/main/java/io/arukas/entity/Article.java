@@ -1,9 +1,11 @@
 package io.arukas.entity;
 
 import lombok.Data;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GeneratorType;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -12,7 +14,8 @@ import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "artilce")
+@Table(name = "article")
+@DynamicUpdate
 @EntityListeners(AuditingEntityListener.class)
 public class Article {
 
@@ -27,6 +30,9 @@ public class Article {
 
     @CreatedDate
     private Date createTime;
+
+    @LastModifiedDate
+    private Date updateTime;
 
     @Version
     private Integer version;
