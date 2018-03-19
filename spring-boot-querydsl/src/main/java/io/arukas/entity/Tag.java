@@ -11,18 +11,16 @@ import java.util.Date;
 
 @Data
 @Entity
-@Table(name = "article")
+@Table(name = "tags")
 @EntityListeners(AuditingEntityListener.class)
-public class Article {
+public class Tag {
 
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
 
-    private String title;
-
-    private String content;
+    private String tagName;
 
     @CreatedDate
     private Date createTime;
@@ -32,5 +30,4 @@ public class Article {
 
     @Version
     private Integer version;
-
 }
