@@ -2,7 +2,6 @@ package io.arukas.service;
 
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.TagName;
 import io.arukas.entity.Article;
 import io.arukas.entity.QArticle;
 import io.arukas.entity.Tag;
@@ -30,7 +29,7 @@ public class ArticleService {
     @Autowired
     private JPAQueryFactory jpaQueryFactory;
 
-    @Transactional
+//    @Transactional
     public List<Article> list(String title){
         QArticle qArticle = QArticle.article;
         JPAQuery<Article> jpaQuery = jpaQueryFactory.selectFrom(qArticle);
