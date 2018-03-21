@@ -1,8 +1,6 @@
 package io.arukas.service;
 
-import io.arukas.entity.Article;
 import io.arukas.entity.Comment;
-import io.arukas.repo.ArticleRepository;
 import io.arukas.repo.CommentRepository;
 import io.qala.datagen.RandomValue;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,17 +13,31 @@ public class CommentService {
     @Autowired
     private CommentRepository commentRepository;
 
-    @Autowired
-    private ArticleRepository articleRepository;
-
+    /**
+     * 为指定的文章评论
+     * @param articleId
+     * @return
+     */
     @Transactional
     public Comment save(String articleId){
-        Article article = articleRepository.findOne(articleId);
         Comment comment = new Comment();
-        comment.setArticle(article);
-        comment.setUserid(RandomValue.length(8).alphanumeric());
+        comment.setUserId(RandomValue.length(8).alphanumeric());
         comment.setContent(RandomValue.length(10).alphanumeric());
-       return commentRepository.save(comment);
+        comment.setArticleId(articleId);
+        comment = commentRepository.save(comment);
+       return comment;
+    }
+
+    /**
+     * 更新评论
+     * @param commentId
+     * @return
+     */
+    @Transactional
+    public Comment update(String commentId){
+        Comment comment = commentRepository.findOne(commentId);
+        comment.setContent(RandomValue.length(200).english());
+        return commentRepository.save(comment);
     }
 
 

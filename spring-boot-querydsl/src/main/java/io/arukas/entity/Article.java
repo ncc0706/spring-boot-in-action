@@ -1,6 +1,7 @@
 package io.arukas.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
@@ -27,6 +28,13 @@ public class Article {
 
     private String content;
 
+    @ManyToMany
+    private Set<Tag> tags;
+
+    @OneToMany
+    @JoinColumn(name = "article_id")
+    private Set<Comment> comments = new HashSet<>();
+
     @CreatedDate
     private Date createTime;
 
@@ -35,13 +43,4 @@ public class Article {
 
     @Version
     private Integer version;
-
-    @ManyToMany
-    private Set<Tag> tags;
-
-    @OneToMany(mappedBy = "article", fetch = FetchType.LAZY)
-//    Fail-safe cleanup (collections) : org.hibernate.engine.loading.internal.CollectionLoadContext
-    @JsonIgnore
-    private Set<Comment> comments = new HashSet<>();
-
 }

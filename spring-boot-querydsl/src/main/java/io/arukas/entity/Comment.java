@@ -20,7 +20,7 @@ public class Comment {
     @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
 
-    private String userid;
+    private String userId;
 
     private String content;
 
@@ -30,8 +30,8 @@ public class Comment {
     @LastModifiedDate
     private Date updateTime;
 
-    @ManyToOne
-    private Article article;
+    @Column(name = "article_id")
+    private String articleId;
 
     @Version
     private Integer version;

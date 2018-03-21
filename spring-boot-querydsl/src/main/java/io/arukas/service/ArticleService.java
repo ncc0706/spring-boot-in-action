@@ -29,7 +29,11 @@ public class ArticleService {
     @Autowired
     private JPAQueryFactory jpaQueryFactory;
 
-//    @Transactional
+    /**
+     * 查询文章
+     * @param title
+     * @return
+     */
     public List<Article> list(String title){
         QArticle qArticle = QArticle.article;
         JPAQuery<Article> jpaQuery = jpaQueryFactory.selectFrom(qArticle);
@@ -41,27 +45,47 @@ public class ArticleService {
         return fetch;
     }
 
+    /**
+     * 保存文章
+     * @param tagName
+     * @return
+     */
     @Transactional
     public Article save(String tagName){
 
         Article article = new Article();
         article.setTitle(RandomValue.length(10).english());
         article.setContent(RandomValue.length(12).english());
-        Tag tag = tagRepository.findByTagName(tagName);
-        Set<Tag> tags = new HashSet<Tag>();
-        Tag c = tagRepository.findByTagName("c");
-        tags.add(tag);
-        tags.add(c);
-        article.setTags(tags);
-        article = articleRepository.save(article);
 
+        Set<Tag> tags = new HashSet<>();
+        Tag tag = tagRepository.findByTagName(tagName);
+        tags.add(tag);
+        article.setTags(tags);
+
+        article = articleRepository.save(article);
         return article;
     }
 
-    public Article update(String id){
-        Article article = articleRepository.findOne(id);
+    /**
+     * 更新文章
+     * @param articleId
+     * @param tagId
+     * @return
+     */
+    public Article update(String articleId, String tagId){
+
+        Article article = articleRepository.findOne(articleId);
         article.setTitle(RandomValue.length(10).english());
         article.setContent(RandomValue.length(12).english());
+
+        // tagId不为空则更新tag
+        if(!ObjectUtils.isEmpty(tagId)){
+            Set<Tag> tags = new HashSet<Tag>();
+            Tag tag = tagRepository.findOne(tagId);
+            tags.add(tag);
+            article.setTags(tags);
+        }
+
         article = articleRepository.save(article);
         return article;
     }
