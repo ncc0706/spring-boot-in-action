@@ -6,6 +6,7 @@ import org.apache.commons.collections.CollectionUtils;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Random;
 
 public class TestList {
 
@@ -25,9 +26,13 @@ public class TestList {
 
         Collection intersection = CollectionUtils.intersection(a, b);
 
-        intersection.forEach(d -> {
-            System.out.println(d);
-        });
+//        intersection.forEach(d -> {
+//            System.out.println(d);
+//        });
+
+
+        System.out.println(b.get(new Random().nextInt(b.size())));
+
 
     }
 
