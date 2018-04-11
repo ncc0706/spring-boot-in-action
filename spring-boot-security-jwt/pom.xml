@@ -71,6 +71,15 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
         </dependency>
+
+
+        <!--frontend-->
+        <dependency>
+            <groupId>org.webjars.bower</groupId>
+            <artifactId>mui</artifactId>
+            <version>0.9.38</version>
+        </dependency>
+
     </dependencies>
 
     <build>
