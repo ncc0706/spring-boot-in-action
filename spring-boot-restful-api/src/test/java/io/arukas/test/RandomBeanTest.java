@@ -1,10 +1,9 @@
 package io.arukas.test;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
+import com.alibaba.fastjson.JSON;
 import io.arukas.model.User;
 import io.github.benas.randombeans.EnhancedRandomBuilder;
 import io.github.benas.randombeans.api.EnhancedRandom;
-import io.github.benas.randombeans.api.Randomizer;
 import io.github.benas.randombeans.randomizers.text.StringRandomizer;
 import org.junit.Test;
 
@@ -39,6 +38,12 @@ public class RandomBeanTest {
                 .objects(User.class, 20)
                 .collect(Collectors.toList());
 
+    }
+
+    @Test
+    public void test03(){
+        User user = EnhancedRandom.random(User.class, "address.id");
+        System.out.println(JSON.toJSONString(user));
     }
 
 }
