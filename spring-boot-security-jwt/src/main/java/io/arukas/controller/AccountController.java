@@ -1,9 +1,11 @@
 package io.arukas.controller;
 
+import io.arukas.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
@@ -13,14 +15,36 @@ import java.security.Principal;
 @RequestMapping("/account")
 public class AccountController {
 
-    @GetMapping(value = "/sign-in")
+    /**
+     * 登陆
+     *
+     * @return
+     */
+    @GetMapping(value = "/signin")
     public String signin() {
 
         if (log.isDebugEnabled()) {
-            log.debug("sign-in");
+            log.debug("signin");
         }
-
         return "account/signin";
+    }
+
+    @PostMapping(value = "/signin")
+    public String signin(User user) {
+
+        if (log.isDebugEnabled()) {
+            log.debug("{}", user);
+        }
+        return "ok";
+    }
+
+    @GetMapping(value = "/signup")
+    public String signup() {
+
+        if (log.isDebugEnabled()) {
+            log.debug("signup");
+        }
+        return "account/signup";
     }
 
     @GetMapping(value = "/403")
