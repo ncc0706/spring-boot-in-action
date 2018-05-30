@@ -1,0 +1,19 @@
+server:
+  port: 80
+spring:
+  application:
+    name: spring-boot-xss
+  mandatory-file-encoding: UTF-8
+  datasource:
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.163.110:3306/spring_boot_xss?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  thymeleaf:
+    cache: false
+    mode: LEGACYHTML5
+
