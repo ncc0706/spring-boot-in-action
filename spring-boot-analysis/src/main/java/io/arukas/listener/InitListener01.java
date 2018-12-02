@@ -14,6 +14,9 @@ import org.springframework.core.env.ConfigurableEnvironment;
  * @Date: 2018/12/2 11:59 <br/>
  * @Email: ncc0706@gmail.com <br/>
  */
+
+// 越小越先执行.
+//@Order(-1)
 public class InitListener01 implements SpringApplicationRunListener {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
