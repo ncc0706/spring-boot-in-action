@@ -1,1 +1,3 @@
 org.springframework.boot.SpringApplicationRunListener=io.arukas.listener.InitListener01
+
+org.springframework.boot.env.EnvironmentPostProcessor=io.arukas.listener.ApplicationStartedEventListener01

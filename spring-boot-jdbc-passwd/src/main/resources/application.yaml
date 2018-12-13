@@ -2,8 +2,8 @@ spring:
   datasource:
     url: jdbc:mysql://192.168.18.200:3306/test
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: ENC(HA0WkJ5IeX5fv3u2gJ/yIQ==)
+    username: ENC(akl7gZDq1uxjDA4o6SUZ2A==)
+    password: ENC(WgNJDGk/78FBy+RvNoMkLw==)
   jpa:
     hibernate:
       ddl-auto: create-drop
@@ -16,5 +16,4 @@ spring:
         format_sql: false
 jasypt:
   encryptor:
-    #    VJp9xCBuS/pGsYZCEHhDWA==
     password: JH8AS90jasH

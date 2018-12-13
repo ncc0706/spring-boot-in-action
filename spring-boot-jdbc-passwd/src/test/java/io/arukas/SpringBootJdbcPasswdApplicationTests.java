@@ -17,10 +17,8 @@ public class SpringBootJdbcPasswdApplicationTests {
     @Test
     public void contextLoads() {
 
-        String encrypt = stringEncryptor.encrypt("123456");
+        String encrypt = stringEncryptor.encrypt("root");
         System.out.println(encrypt);
-
-        encrypt = "woFhcgipNseuXdimXhQvUg==";
         String decrypt = stringEncryptor.decrypt(encrypt);
         System.out.println(decrypt);
     }

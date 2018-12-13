@@ -16,11 +16,12 @@ public class Test01 {
     public static void main(String[] args) {
         //PBEWithMD5AndDES
         BasicTextEncryptor encryptor = new BasicTextEncryptor();
-        encryptor.setPassword("apdplat");
-        String encrypted = encryptor.encrypt("xxxx");
+        encryptor.setPassword("J3l9oryQmwYk60H1h28VdzceDqbCZ5sifPAnkOLuSUvKWBXCag47M");
+        String encrypted = encryptor.encrypt("jdbc:mysql://47.52.149.71:3306/k2d?useSSL=false&createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2b8");
         System.out.println(encrypted);
 
 
+        /*
         //加密工具
         StandardPBEStringEncryptor encryptor2 = new StandardPBEStringEncryptor();
         //加密配置
@@ -34,6 +35,7 @@ public class Test01 {
         //解密
         String plaintext = encryptor2.decrypt(ciphertext);
         System.out.println(ciphertext + " : " + plaintext);
+        */
 
     }
 

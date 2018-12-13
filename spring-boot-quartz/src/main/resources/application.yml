@@ -6,3 +6,6 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   quartz:
     job-store-type: jdbc
+    jdbc:
+      schema: classpath:schema/tables_mysql_innodb.sql
+      initialize-schema: never

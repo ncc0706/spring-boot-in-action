@@ -16,5 +16,6 @@ public class SpringBootAnalysisApplication {
 //        application.addInitializers();
 
         application.run(args);
+        application.addInitializers();
     }
 }
