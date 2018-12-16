@@ -9,6 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Created by IntelliJ IDEA. <br/>
@@ -21,15 +23,31 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class TaskEndpoint {
 
     @Autowired
-    private TaskInfoService jobAndTriggerService;
+    private TaskInfoService taskInfoService;
 
-    @GetMapping(value = "tasks")
+    @GetMapping(value = "list-task")
     public String taskList(Pageable pageable, ModelMap modelMap) {
-        Page<TaskInfo> taskList = jobAndTriggerService.taskList(pageable);
-
+        Page<TaskInfo> taskList = taskInfoService.taskList(pageable);
         modelMap.put("taskList", taskList);
-        System.out.println(JSON.toJSONString(taskList));
         return "tasks";
+    }
+
+    @ResponseBody
+    @GetMapping(value = "tasks")
+    public Page<TaskInfo> taskList(Pageable pageable) {
+        return taskInfoService.taskList(pageable);
+    }
+
+    @GetMapping(value = "add-task")
+    public String createTask() {
+
+        return "addTask";
+    }
+
+    @ResponseBody
+    @PostMapping(value = "add-task")
+    public void createTask(TaskInfo taskInfo) throws Exception {
+        taskInfoService.addJob(taskInfo);
     }
 
 }

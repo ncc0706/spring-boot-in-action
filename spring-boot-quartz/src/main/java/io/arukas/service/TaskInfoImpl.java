@@ -1,7 +1,6 @@
 package io.arukas.service;
 
 import io.arukas.entity.TaskInfo;
-import io.arukas.job.BaseJob;
 import io.arukas.repository.TaskInfoRepository;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,26 +33,40 @@ public class TaskInfoImpl implements TaskInfoService {
 
 
     @Override
-    public void addJob(String jobName, String jobClass, String jobGroupName, String cronExpression) throws Exception {
-        // 启动调度器
-        scheduler.start();
+    public void addJob(TaskInfo taskInfo) throws Exception{
+
+        String jobName = taskInfo.getJobName();
+        String jobGroup = taskInfo.getJobGroup();
+
+        String jobDescription = taskInfo.getJobDescription();
+        String cronExpression = taskInfo.getCronExpression();
+        Class jobClass = taskInfo.getJobClass();
+
+        JobDataMap jobDataMap = taskInfo.getJobDataMap();
 
         // 构建job信息
-        JobDetail jobDetail = JobBuilder.newJob(getClass(jobClass).getClass())
-                .withIdentity(jobName, jobGroupName).build();
+        final JobKey jobKey = JobKey.jobKey(jobName, jobGroup);
+        JobDetail jobDetail = JobBuilder.newJob(jobClass)
+                .withIdentity(jobKey)
+                .withDescription(jobDescription)
+                .build();
 
         // 表达式调度构建器(即任务执行的时间)
-        CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(cronExpression);
+        CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(cronExpression)
+                .withMisfireHandlingInstructionDoNothing();
 
         // 按新的cronExpression表达式构建一个新的trigger
-        CronTrigger trigger = TriggerBuilder.newTrigger().withIdentity(jobName + "(trigger)", jobGroupName)
+        final TriggerKey triggerKey = TriggerKey.triggerKey(jobName + "(trigger)", jobGroup);
+        CronTrigger trigger = TriggerBuilder.newTrigger()
+                .withIdentity(triggerKey)
+                .withDescription(jobDescription)
                 .withSchedule(scheduleBuilder).build();
+
         try {
             scheduler.scheduleJob(jobDetail, trigger);
-            System.out.println("创建定时任务成功");
         } catch (SchedulerException e) {
-            System.out.println("创建定时任务失败" + e);
-            throw new Exception("创建定时任务失败");
+            e.printStackTrace();
+            throw e;
         }
 
     }
@@ -93,9 +106,9 @@ public class TaskInfoImpl implements TaskInfoService {
         scheduler.resumeJob(JobKey.jobKey(jobClassName, jobGroupName));
     }
 
-    public static BaseJob getClass(String classname) throws Exception {
-        Class<?> class1 = Class.forName(classname);
-        return (BaseJob) class1.newInstance();
-    }
+//    public static BaseJob getClass(String classname) throws Exception {
+//        Class<?> class1 = Class.forName(classname);
+//        return (BaseJob) class1.newInstance();
+//    }
 
 }

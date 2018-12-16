@@ -15,7 +15,7 @@ public interface TaskInfoService {
 
     Page<TaskInfo> taskList(Pageable pageable);
 
-    void addJob(String jobName, String jobClass, String jobGroupName, String cronExpression) throws Exception;
+    void addJob(TaskInfo taskInfo) throws Exception;
 
     void updateJob(String jobClassName, String jobGroupName, String cronExpression) throws Exception;
 

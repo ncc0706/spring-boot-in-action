@@ -1,7 +1,9 @@
 package io.arukas.job;
 
+import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
+import org.springframework.scheduling.quartz.QuartzJobBean;
 
 import java.util.Date;
 
@@ -12,9 +14,9 @@ import java.util.Date;
  * @Date: 2018/12/5 23:42 <br/>
  * @Email: ncc0706@gmail.com <br/>
  */
-public class HelloJob implements BaseJob {
+public class HelloJob extends QuartzJobBean {
     @Override
-    public void execute(JobExecutionContext context) throws JobExecutionException {
-        System.err.println("Hello Job执行时间: " + new Date());
+    protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
+        System.out.println("hello job.");
     }
 }
