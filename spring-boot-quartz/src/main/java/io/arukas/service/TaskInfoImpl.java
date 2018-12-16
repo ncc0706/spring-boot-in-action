@@ -1,13 +1,14 @@
 package io.arukas.service;
 
-import io.arukas.dto.JobAndTriggerDto;
+import io.arukas.entity.TaskInfo;
 import io.arukas.job.BaseJob;
-import io.arukas.utils.PageUtil;
+import io.arukas.repository.TaskInfoRepository;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.Map;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by IntelliJ IDEA. <br/>
@@ -17,26 +18,20 @@ import java.util.Map;
  * @Email: ncc0706@gmail.com <br/>
  */
 @Service
-public class JobAndTriggerImpl implements IJobAndTriggerService {
+public class TaskInfoImpl implements TaskInfoService {
 
     @Autowired
     private Scheduler scheduler;
 
+    @Autowired
+    private TaskInfoRepository taskInfoRepository;
 
-    public Map<String, Object> getPageJob(PageUtil search) {
-//        Pagination page = new Page<Object>(search.getPage(), search.getRows(), search.getSort());
-//        List<JobAndTriggerDto> records = jobAndTriggerMapper.getJobAndTriggerDetails(page);
-//        return search.getResultMap(page.getTotal(), records);
 
-        return null;
+    @Transactional(readOnly = true)
+    public Page<TaskInfo> taskList(Pageable pageable) {
+        return taskInfoRepository.findAll(pageable);
     }
 
-    @Override
-    public JobAndTriggerDto getPageJobmod() {
-        //return jobAndTriggerMapper.getJobAndTriggerDto();
-
-        return null;
-    }
 
     @Override
     public void addJob(String jobName, String jobClass, String jobGroupName, String cronExpression) throws Exception {
@@ -53,11 +48,9 @@ public class JobAndTriggerImpl implements IJobAndTriggerService {
         // 按新的cronExpression表达式构建一个新的trigger
         CronTrigger trigger = TriggerBuilder.newTrigger().withIdentity(jobName + "(trigger)", jobGroupName)
                 .withSchedule(scheduleBuilder).build();
-
         try {
             scheduler.scheduleJob(jobDetail, trigger);
             System.out.println("创建定时任务成功");
-
         } catch (SchedulerException e) {
             System.out.println("创建定时任务失败" + e);
             throw new Exception("创建定时任务失败");
@@ -71,9 +64,7 @@ public class JobAndTriggerImpl implements IJobAndTriggerService {
             TriggerKey triggerKey = TriggerKey.triggerKey(jobClassName, jobGroupName);
             // 表达式调度构建器
             CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(cronExpression);
-
             CronTrigger trigger = (CronTrigger) scheduler.getTrigger(triggerKey);
-
             // 按新的cronExpression表达式重新构建trigger
             trigger = trigger.getTriggerBuilder().withIdentity(triggerKey).withSchedule(scheduleBuilder).build();
 

@@ -112,7 +112,7 @@ public class PageUtil implements Serializable {
 
     // 得到返回Easyui的数据
     public Map<String, Object> getResultMap(List<?> content) {
-        Map<String, Object> resultMap = new HashMap<String, Object>();
+        Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("total", totalRow);
         resultMap.put("rows", content);
         return resultMap;
@@ -120,7 +120,7 @@ public class PageUtil implements Serializable {
 
     // 得到返回Easyui的数据
     public Map<String, Object> getResultMap(Integer totalRow, List<?> content) {
-        Map<String, Object> resultMap = new HashMap<String, Object>();
+        Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("total", totalRow);
         resultMap.put("rows", content);
         return resultMap;
@@ -128,7 +128,7 @@ public class PageUtil implements Serializable {
 
     // 得到返回APP的数据
     public Map<String, Object> getAppResultMap(PageUtil pageUtil, List<?> content) {
-        Map<String, Object> resultMap = new HashMap<String, Object>();
+        Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("pages", pageUtil);
         resultMap.put("result", content);
         return resultMap;

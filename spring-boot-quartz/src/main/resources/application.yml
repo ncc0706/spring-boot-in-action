@@ -9,3 +9,5 @@ spring:
     jdbc:
       schema: classpath:schema/tables_mysql_innodb.sql
       initialize-schema: never
+  thymeleaf:
+    cache: false
